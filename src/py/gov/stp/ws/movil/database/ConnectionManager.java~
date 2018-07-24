@@ -1,0 +1,30 @@
+package py.gov.stp.ws.movil.database;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnectionManager {
+	
+	public ConnectionManager() {}
+	
+	public Connection getConexion(){
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		Connection connection = null;
+		
+		try {
+			connection = DriverManager.getConnection("jdbc:postgresql://pg01.stp.gov.py/movil_4?useUnicode=true&characterEncoding=UTF-8","postgres","t3R3R3.ol");
+			//connection = DriverManager.getConnection("jdbc:postgresql://pg01test/movil_4?useUnicode=true&characterEncoding=UTF-8","postgres","t3R3R3.ol");
+			//connection = DriverManager.getConnection("jdbc:postgresql://192.168.12.30/movil_4?useUnicode=true&characterEncoding=UTF-8","postgres","t3R3R3.ol");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return connection;
+	}
+}
